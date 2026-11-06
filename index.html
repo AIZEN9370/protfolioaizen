@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gaurav Shinde — Data Analyst &amp; ML Engineer // Telemetry Terminal</title>
+  
+  <!-- Semantic Meta & SEO -->
+  <meta name="description" content="Production-ready interactive Data Analyst & Machine Learning portfolio for Gaurav Shinde. 100vw x 100vh live telemetry terminal & particle simulation.">
+  <meta name="theme-color" content="#0A0B0E">
+
+  <!-- Google Fonts: Space Grotesk (Editorial Sans) + JetBrains Mono (Tabular Numerals) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Design System & Visual Tokens -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       BACKGROUND CANVAS: 60FPS DATA STREAM & SHOCKWAVE SIMULATION
+       ======================================================================== -->
+  <canvas id="sim-canvas" aria-label="Live data stream particle simulation"></canvas>
+
+  <!-- ========================================================================
+       HUD VIEWPORT OVERLAY (100vw x 100vh LOCKED VIEWPORT)
+       ======================================================================== -->
+  <div class="hud-viewport-overlay">
+
+    <!-- ----------------------------------------------------------------------
+         ZONE A: TOP-LEFT LIVE TELEMETRY HUD
+         ---------------------------------------------------------------------- -->
+    <header class="zone-a-telemetry hud-glass" role="banner">
+      <div class="telemetry-header-row">
+        <div class="live-indicator">
+          <span class="pulse-dot"></span>
+          <span>telemetry stream active</span>
+        </div>
+        <div class="author-handle">GAURAV SHINDE // 0xGS</div>
+      </div>
+
+      <div class="giant-counter-container">
+        <div id="telemetry-giant-counter" class="giant-counter tabular-nums">429,000,000</div>
+        <span id="telemetry-millions-badge" class="millions-badge tabular-nums">429.0M</span>
+      </div>
+
+      <div class="sub-telemetry-grid">
+        <span id="telemetry-rate-readout" class="telemetry-highlight tabular-nums">+14.2k rows per second</span>
+        <span id="telemetry-target-readout" class="telemetry-muted">target 1.0b records</span>
+        <span id="telemetry-elapsed-readout" class="telemetry-muted tabular-nums">0:00 elapsed</span>
+      </div>
+
+      <div class="telemetry-legend" aria-label="Data node color legend">
+        <div class="legend-item" title="Validated & clustered machine learning nodes">
+          <span class="dot-blue">●</span> blue: validated (<span id="legend-count-blue" class="legend-val tabular-nums">0</span>)
+        </div>
+        <div class="legend-item" title="Anomalies and fraud signals">
+          <span class="dot-yellow">●</span> yellow: anomalies (<span id="legend-count-yellow" class="legend-val tabular-nums">0</span>)
+        </div>
+        <div class="legend-item" title="Noisy telemetry outliers">
+          <span class="dot-red">●</span> red: noise (<span id="legend-count-red" class="legend-val tabular-nums">0</span>)
+        </div>
+      </div>
+    </header>
+
+    <!-- ----------------------------------------------------------------------
+         ZONE B: CENTER-RIGHT "MODEL THRESHOLD / STACK COMPLEXITY" METER
+         ---------------------------------------------------------------------- -->
+    <aside class="zone-b-threshold hud-glass" role="complementary" aria-label="Model Threshold Meter">
+      <div class="threshold-top-row">
+        <span class="threshold-label">model threshold / complexity</span>
+        <span id="threshold-tier-title" class="threshold-tier-tag">bi &amp; statistical modeling</span>
+      </div>
+
+      <div class="meter-control-box">
+        <button id="btn-threshold-dec" class="btn-meter" type="button" aria-label="Decrease threshold by 5%">−</button>
+        <div id="threshold-meter-val" class="meter-numeric-display tabular-nums">35%</div>
+        <button id="btn-threshold-inc" class="btn-meter" type="button" aria-label="Increase threshold by 5%">+</button>
+      </div>
+
+      <p class="meter-helper-text">
+        raise the threshold using <strong>+</strong> or <strong>↑↓</strong>. this pipeline carries up to <strong id="threshold-accuracy-val">99.4%</strong> accuracy.
+      </p>
+
+      <div class="stack-tags-section">
+        <div class="stack-section-title">
+          <span>active technology stack</span>
+          <span class="telemetry-muted">scales with meter</span>
+        </div>
+        <div class="stack-tags-cloud">
+          <!-- Tier 1: 10% - 30% (Core Analytics) -->
+          <span class="stack-chip active" data-tier="1">Excel VBA</span>
+          <span class="stack-chip active" data-tier="1">SQL</span>
+          <span class="stack-chip active" data-tier="1">MySQL</span>
+          <span class="stack-chip active" data-tier="1">Data Cleaning</span>
+          <span class="stack-chip active" data-tier="1">Financial Reporting</span>
+          
+          <!-- Tier 2: 35% - 65% (BI & Modeling) -->
+          <span class="stack-chip active highlight-tier" data-tier="2">Python</span>
+          <span class="stack-chip active highlight-tier" data-tier="2">Power BI</span>
+          <span class="stack-chip active highlight-tier" data-tier="2">Tableau</span>
+          <span class="stack-chip active highlight-tier" data-tier="2">MongoDB</span>
+          <span class="stack-chip active highlight-tier" data-tier="2">Time-Series</span>
+          <span class="stack-chip active highlight-tier" data-tier="2">Monte Carlo</span>
+
+          <!-- Tier 3: 70% - 100% (Big Data & MLOps) -->
+          <span class="stack-chip" data-tier="3">PySpark</span>
+          <span class="stack-chip" data-tier="3">Kafka</span>
+          <span class="stack-chip" data-tier="3">Feast</span>
+          <span class="stack-chip" data-tier="3">MLflow</span>
+          <span class="stack-chip" data-tier="3">Streamlit</span>
+          <span class="stack-chip" data-tier="3">FastAPI</span>
+          <span class="stack-chip" data-tier="3">RAG</span>
+          <span class="stack-chip" data-tier="3">MCP Server</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ----------------------------------------------------------------------
+         ZONE C: BOTTOM ACTION DOCK (DEPLOYABLE PROJECT CARDS 1 TO 5)
+         ---------------------------------------------------------------------- -->
+    <nav class="zone-c-dock" id="project-cards-dock" aria-label="Deployable portfolio projects"></nav>
+
+    <!-- ----------------------------------------------------------------------
+         ZONE D: BOTTOM COMMAND FOOTER BAR
+         ---------------------------------------------------------------------- -->
+    <footer class="zone-d-footer" role="contentinfo">
+      <div class="command-bar-pill hud-glass">
+        <span><span class="command-key">space</span> dossier</span>
+        <span><span class="command-key">1–5</span> deploy project</span>
+        <span><span class="command-key">g</span> github</span>
+        <span><span class="command-key">l</span> linkedin</span>
+        <span><span class="command-key">↑↓</span> stack threshold</span>
+        <span><span class="command-key">esc</span> clear</span>
+      </div>
+
+      <div class="footer-controls">
+        <button id="btn-sound-toggle" class="btn-hud-control hud-glass" type="button" aria-label="Toggle sound synthesis">
+          <span class="sound-label">audio: on</span>
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================================
+       FLOATING RETICLE TOOLTIP (PLACEMENT MODE)
+       ======================================================================== -->
+  <div id="reticle-tooltip" class="hidden" aria-hidden="true">[tap canvas to deploy model]</div>
+
+  <!-- ========================================================================
+       MODAL 1: INTRO / TUTORIAL OVERLAY (INITIAL LOAD)
+       ======================================================================== -->
+  <div id="intro-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+    <div class="intro-card hud-glass">
+      <div class="intro-tagline">Telemetry Terminal // Simulation-First Portfolio</div>
+      <h1 id="intro-title" class="intro-title">Gaurav Shinde — Data Analyst &amp; ML Engineer</h1>
+      <p class="intro-subtitle">
+        "You are looking at a lot of noisy data, and standing on quite a lot of insights."
+      </p>
+
+      <div class="intro-legend-box">
+        <div class="legend-row">
+          <span class="legend-badge badge-yellow">YELLOW</span>
+          <span class="legend-desc">High-priority anomalies &amp; fraud patterns streaming toward core</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-badge badge-blue">BLUE</span>
+          <span class="legend-desc">Validated ML models generating live value &amp; clustered signals</span>
+        </div>
+        <div class="legend-row">
+          <span class="legend-badge badge-red">RED</span>
+          <span class="legend-desc">Raw telemetry noise &amp; uncalibrated outliers drifting outward</span>
+        </div>
+      </div>
+
+      <div class="intro-actions">
+        <button id="btn-start-sim" class="btn-start-simulation" type="button">Start Simulation</button>
+        <span class="btn-skip-hint">or press [enter] to inspect canvas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: ANALYST DOSSIER MODAL (SPACE KEY)
+       ======================================================================== -->
+  <div id="dossier-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="dossier-title">
+    <div class="dossier-card hud-glass">
+      <div class="dossier-header">
+        <div class="drawer-header-left">
+          <div class="dossier-badge-row">
+            <span class="dossier-badge">STATUS: ACTIVE_VERIFIED</span>
+            <span class="telemetry-muted">ID: GS-9370-DS</span>
+          </div>
+          <h2 id="dossier-title" class="dossier-title">Gaurav Shinde</h2>
+        </div>
+        <button id="btn-close-dossier" class="btn-close-box" type="button" aria-label="Close dossier">✕</button>
+      </div>
+
+      <div class="dossier-summary-block">
+        Data Analyst &amp; Machine Learning Engineer with a solid foundation in <strong>Financial Accounting (B.Com)</strong>, <strong>1 year of hands-on professional accounting &amp; financial data reconciliation experience</strong>, and specialized training in advanced <strong>Data Science, Machine Learning, and MLOps</strong>.
+      </div>
+
+      <div class="dossier-grid">
+        <div class="dossier-field">
+          <span class="dossier-field-label">academic discipline</span>
+          <span class="dossier-field-value">Bachelor of Commerce (B.Com) — Financial Accounting &amp; Auditing</span>
+        </div>
+        <div class="dossier-field">
+          <span class="dossier-field-label">industry experience</span>
+          <span class="dossier-field-value">1 Year Professional Accounting &amp; Ledger Reconciliation</span>
+        </div>
+        <div class="dossier-field">
+          <span class="dossier-field-label">mlops &amp; pipelines</span>
+          <span class="dossier-field-value">FastAPI, Feast Feature Store, Apache Kafka, MLflow, Evidently AI</span>
+        </div>
+        <div class="dossier-field">
+          <span class="dossier-field-label">bi &amp; database systems</span>
+          <span class="dossier-field-value">Power BI, Tableau, SQL, MySQL Workbench, MongoDB, Excel VBA</span>
+        </div>
+        <div class="dossier-field">
+          <span class="dossier-field-label">ai &amp; frontier protocols</span>
+          <span class="dossier-field-value">Anthropic/Gemini Model Context Protocol (MCP), FAISS RAG, FinBERT</span>
+        </div>
+        <div class="dossier-field">
+          <span class="dossier-field-label">telemetry &amp; modeling</span>
+          <span class="dossier-field-value">Time-Series Alpha, Reinforcement Learning (PPO/SAC), Monte Carlo</span>
+        </div>
+      </div>
+
+      <div class="dossier-links-row">
+        <a href="https://github.com/AIZEN9370" target="_blank" rel="noopener noreferrer" class="btn-dossier-link btn-dossier-primary">
+          <span>GitHub Portfolio (@AIZEN9370) ↗</span>
+        </a>
+        <a href="https://www.linkedin.com/in/gaurav-shinde-064977344" target="_blank" rel="noopener noreferrer" class="btn-dossier-link">
+          <span>LinkedIn Profile ↗</span>
+        </a>
+        <a href="mailto:aizengeo5@gmail.com" class="btn-dossier-link">
+          <span>Direct Email (aizengeo5@gmail.com)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: PROJECT INSPECTION DRAWER (TRIGGERED ON CANVAS DEPLOYMENT)
+       ======================================================================== -->
+  <aside id="inspection-drawer" class="inspection-drawer" aria-labelledby="drawer-proj-title">
+    <div class="drawer-header">
+      <div class="drawer-header-left">
+        <span id="drawer-proj-key" class="drawer-proj-key">PIPELINE [01]</span>
+        <h2 id="drawer-proj-title" class="drawer-proj-title">Fraud Detection MLOps</h2>
+      </div>
+      <button id="btn-close-drawer" class="btn-close-box" type="button" aria-label="Close project drawer">✕</button>
+    </div>
+
+    <div class="drawer-content">
+      <div class="drawer-metrics-strip">
+        <div class="drawer-metric-item">
+          <span class="drawer-metric-label">primary latency</span>
+          <span id="drawer-metric-primary" class="drawer-metric-val">&lt;50ms</span>
+        </div>
+        <div class="drawer-metric-item">
+          <span class="drawer-metric-label">precision metric</span>
+          <span id="drawer-metric-secondary" class="drawer-metric-val">99.2% AUC</span>
+        </div>
+        <div class="drawer-metric-item">
+          <span class="drawer-metric-label">throughput</span>
+          <span id="drawer-throughput" class="drawer-metric-val">15k req/sec</span>
+        </div>
+      </div>
+
+      <div class="drawer-section">
+        <span class="drawer-section-heading">operational problem</span>
+        <p id="drawer-problem" class="drawer-text"></p>
+      </div>
+
+      <div class="drawer-section">
+        <span class="drawer-section-heading">production architecture &amp; pipeline</span>
+        <div id="drawer-architecture" class="drawer-arch-box"></div>
+      </div>
+
+      <div class="drawer-section">
+        <span class="drawer-section-heading">verifiable impact &amp; metrics</span>
+        <p id="drawer-results" class="drawer-text"></p>
+      </div>
+
+      <div class="drawer-section">
+        <span class="drawer-section-heading">engineered stack</span>
+        <div id="drawer-stack-list" class="drawer-stack-list"></div>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <a id="drawer-gh-link" href="https://github.com/AIZEN9370" target="_blank" rel="noopener noreferrer" class="btn-drawer-gh">
+        inspect repository on github ↗
+      </a>
+      <span class="telemetry-muted" style="font-size: 10px; font-family: var(--font-mono); text-align: center;">
+        press [esc] to dismiss drawer
+      </span>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       MODULAR SCRIPTS
+       ======================================================================== -->
+  <script src="js/audio.js"></script>
+  <script src="js/simulation.js"></script>
+  <script src="js/telemetry.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
